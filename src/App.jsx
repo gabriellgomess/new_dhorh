@@ -1,6 +1,3 @@
-import { Layout } from 'antd';
-const { Header, Footer, Content } = Layout;
-
 // components
 import Cards from './components/Cards';
 import HeaderTop from './components/Header';
@@ -20,17 +17,17 @@ const footerStyle = {
 const App = () => {
  
   return (
-    <Layout>
-      <Header style={headerStyle}>
+    <>
+      <div style={headerStyle}>
         <HeaderTop />
-      </Header>
-      <Content style={contentStyle}>
+      </div>
+      <div style={contentStyle}>
         <Cards />
-      </Content>
-      <Footer style={footerStyle}>
+      </div>
+      <div style={footerStyle}>
         <FooterBottom />
-      </Footer>
-    </Layout>
+      </div>
+    </>
   );
 }
 
