@@ -6,3 +6,38 @@ div.ant-layout-header {
   font-family: 'Mooli', sans-serif;
   color: rgb(55, 55, 55);
 }
+
+.containerContentHeader{
+  position: absolute;
+  top: 30px;
+  left: 60px;
+  width: 600px;
+}
+
+.imageHeader{
+  width: 220px;
+}
+
+.textHeader{
+  font-size: 35px;
+  font-weight: bold;
+  color: rgb(55, 55, 55);
+}
+
+/* Estilo para mobile */
+@media (max-width: 768px) {
+  .containerContentHeader{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+  }
+  .imageHeader{
+    width: 100px;
+  }
+  .textHeader{
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(55, 55, 55);
+  }
+}

@@ -6,18 +6,14 @@ import '../App.css';
 const { Title } = Typography;
 
 const Header = () => {
-    const styleHeader = { 
-        position: 'absolute',
-        top: '20px',
-        left: '20px',
-    };
+
 
     return (
         <div>
             <img width="100%" src={BgHeader} alt="" />           
-            <div style={styleHeader}>
-                <img width={220} src={Logo} alt="" />
-                <Title className="fontMooli" level={3}>A ponte entre sonhos e realidade, talentos e oportunidades.</Title>
+            <div className="containerContentHeader">
+                <img className="imageHeader" src={Logo} alt="" />
+                <h2 className="fontMooli textHeader">A ponte entre sonhos e realidade, talentos e oportunidades.</h2>
             </div>                
         </div>
     );

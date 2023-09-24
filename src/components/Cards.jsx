@@ -69,7 +69,11 @@ const Cards = () => {
             return (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Badge count="Vaga Nova" color="green" style={{ marginRight: '8px' }} />
-                <Text strong>{formattedDate}</Text>
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'end'}}>
+                    <Text>Publicado em:</Text>
+                    <Text strong>{formattedDate}</Text>
+                </div>
+                
             </div>
             );
         }
@@ -104,7 +108,7 @@ const Cards = () => {
                             />
                         }                        
                         actions={[
-                            <a href={`mailto:${vaga.attributes.email}?subject=${vaga.attributes.titulo}`} target="_blank" rel="noreferrer">
+                            <a href={`mailto:${vaga.attributes.email}?subject=Currículo para a vaga de ${vaga.attributes.titulo}`} target="_blank" rel="noreferrer">
                                 <FontAwesomeIcon icon={faEnvelope} />
                             </a>,
                             <FontAwesomeIcon icon={faUpRightFromSquare} onClick={() => shareImage(`https://strapi-production-5fc1.up.railway.app${vaga.attributes.imagem.data.attributes.formats.small.url}`)} />
