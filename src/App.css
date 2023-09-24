@@ -1,3 +1,8 @@
 div.ant-layout-header {
     padding: 0 !important;
-  }
+}
+
+.fontMooli{
+  font-family: 'Mooli', sans-serif;
+  color: rgb(55, 55, 55);
+}

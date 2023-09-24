@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Card, Modal } from "antd";
+import { Typography, Card, Modal, Badge } from "antd";
 import axios from "axios";
 import Recrutamento from '../assets/recrutamento.gif';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const Cards = () => {
     const [vagas, setVagas] = useState([]);
@@ -14,7 +14,7 @@ const Cards = () => {
     const [currentImageUrl, setCurrentImageUrl] = useState("");
 
     useEffect(() => {
-        axios.get("https://strapi-production-5fc1.up.railway.app/api/vagas?populate=*")
+        axios.get("https://strapi-production-5fc1.up.railway.app/api/vagas?sort=createdAt:DESC&populate=*")
         .then((response) => {
             setVagas(response.data.data);
         })
@@ -46,6 +46,42 @@ const Cards = () => {
         }
     };
 
+    const formatDate = (date) => {
+        const currentDate = new Date();
+        const dateObject = new Date(date);
+    
+        // Remover horas, minutos e segundos para fazer uma comparação apenas da data
+        currentDate.setHours(0, 0, 0, 0);
+        dateObject.setHours(0, 0, 0, 0);
+    
+        // Calcular a diferença em dias
+        const differenceInTime = currentDate - dateObject;
+        const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    
+        // Formatar a data
+        const day = dateObject.getDate();
+        const month = dateObject.getMonth() + 1;
+        const year = dateObject.getFullYear();
+        const formattedDate = `${day}/${month < 10 ? '0'+month : month}/${year}`;
+    
+        // Se a diferença for de até 3 dias, retornar o componente com destaque
+        if (differenceInDays <= 3) {
+            return (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Badge count="Vaga Nova" color="green" style={{ marginRight: '8px' }} />
+                <Text strong>{formattedDate}</Text>
+            </div>
+            );
+        }
+        
+        // Para datas mais antigas, apenas um texto estilizado
+        return <Text style={{ fontStyle: 'italic' }}>{formattedDate}</Text>;
+    };
+    
+    
+    
+    
+
 
     return (
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -55,7 +91,8 @@ const Cards = () => {
             
             <div style={{display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap', width: '80%', margin: '0 auto'}}>
                 {vagas.map((vaga) => (
-                    <Card 
+                    <Card
+                        extra={<div>{formatDate(vaga.attributes.publishedAt)}</div>}                    
                         key={vaga.id}
                         style={{ marginBottom: 20, width: 330 }} 
                         cover={
@@ -75,8 +112,9 @@ const Cards = () => {
                     >
                         <Card.Meta 
                             title={vaga.attributes.titulo} 
-                            description={vaga.attributes.email}
+                            description={`${vaga.attributes.email}`}
                         />
+
                     </Card>
                 ))}
             </div>
